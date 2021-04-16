@@ -8,6 +8,16 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <frc/Joystick.h>
+
+frc::Joystick l_stick (0);
+frc::Joystick r_stick (1);
+frc::Joystick logicontroller (3);
+
+#include "subsystems/Drivetrain.h"
+
+Drivetrain drivetrain;
+
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
@@ -56,9 +66,17 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+  drivetrain.Stop();
+}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  drivetrain.Drive(
+    l_stick.GetRawAxis(0),
+    l_stick.GetRawAxis(1),
+    r_stick.GetRawAxis(0)
+  );
+}
 
 void Robot::DisabledInit() {}
 
