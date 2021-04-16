@@ -1,0 +1,4 @@
+class Intake {
+    public:
+    private: 
+};
